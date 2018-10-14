@@ -1,9 +1,10 @@
 const Model = {
-  modelStorage: [],
+  modelStorage: {},
 
-  saveToLocalStorage() {
+  saveToLocalStorage(object) {
     console.log("saved to storage");
-    localStorage.data = JSON.stringify(this.modelStorage);
+    console.log(object);
+    localStorage.data = JSON.stringify(object);
   },
 
   cleanLocalStorage() {
@@ -11,10 +12,8 @@ const Model = {
     localStorage.data = "";
   },
 
-  saveToModelStorage(object) {
-    console.log("object");
-    console.log(object);
-    this.modelStorage.push(object)
+  saveToModelStorage(key,object) {
+    this.modelStorage[key] = object
     console.log('this.modelStorage');
     console.log(this.modelStorage);
   },

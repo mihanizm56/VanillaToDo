@@ -4,49 +4,62 @@ import View from "./view.js";
 
 const Controller = {
     init() {
-        console.log('пришло в Controller.init')
         Model.insertFromStorage()
-            .then((data) => {
-                console.log(data)
+            .then(data => {
+                //console.log(data);
                 this.insertTasks(data);
+                this.renderModelStorage(data)
             })
-        this.addListeners()
+        this.addListeners();
     },
     addListeners() {
         document.addEventListener('click', () => { this.delegateClick(event) })
     },
     delegateClick(event) {
-        console.log(event.target.className);
+        //console.log(event.target.className);
         if (event.target.className == "add-button") return this.addTask(event);
-        if (event.target.className == "save-button") return Model.saveToLocalStorage();
-        if (event.target.className == "update-button") return this.updateTasks();
+        if (event.target.className == "save-button") return this.saveToStorage();
+        if (event.target.className == "done-box") return this.doneCheck(event);
+        if (event.target.className == "delete-button") return this.deleteTask(event);
     },
     addTask(event) {
-        console.log("пришло в addTask");
+        //console.log("пришло в addTask");
         const task = event.target.parentElement.firstElementChild.value;
         const doneCheck = event.target.previousElementSibling.checked;
         const object = { task, doneCheck }
 
-        Model.saveToModelStorage(object);
+        Model.saveToModelStorage(task, object);
         View.addTask(object);
     },
-    insertTasks(array) {
-        View.cleanWrapper();
-        array.map(object => {
-            if (!object.doneCheck) {
-                View.addTask(object);
-            }
-        })
+    saveToStorage(){
+        Model.cleanLocalStorage();
+        Model.saveToLocalStorage(Model.modelStorage);
     },
-    updateTasks() {
-        Model.insertFromStorage()
-            .then((data) => {
-                console.log('data updated')
-                this.insertTasks(data);
-            })
-            .then(()=>{
-                Model.cleanLocalStorage();
-            })
+    insertTasks(object) {
+        View.cleanWrapper();
+        //console.log('checkInsert')
+        for (let key in object) {
+            View.addTask(object[key]);
+        }
+    },
+    deleteTask(event) {
+        //console.log("прилетело в deleteTask");
+        const key = event.target.parentElement.firstElementChild.innerText
+        const element = event.target.parentElement;
+
+        element.style.display = "none";
+        delete Model.modelStorage[key]
+    },
+    renderModelStorage(object){
+        //console.log("renderModelStorage");
+        //console.log(object);
+        Model.modelStorage = {...object}
+        //console.log("Model.modelStorage");
+        //console.log(Model.modelStorage);
+    },
+    doneCheck(event) {
+        //console.log("doneCheck");
+        Model.modelStorage[event.target.parentElement.firstElementChild.innerText].doneCheck = event.target.checked;
     }
 }
 
