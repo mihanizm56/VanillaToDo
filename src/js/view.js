@@ -1,9 +1,9 @@
 const View = {
+  
   addTask(object) {
-    //console.log("check View.addTask");
     const wrapper = document.querySelector(".main-wrapper");
-    const container = document.createElement('div')
-    let checked = object.doneCheck ? 'checked' : ''
+    const container = document.createElement('div');
+    let checked = object.doneCheck ? 'checked' : '';
 
     container.innerHTML = `
     <div class="using-task">
@@ -18,9 +18,9 @@ const View = {
     
     wrapper.appendChild(container);
   },
+
   cleanWrapper(){
-    const wrapper = document.querySelector(".main-wrapper");
-    wrapper.innerHTML = ''
+    document.querySelector(".main-wrapper").innerHTML = "";
   }
 }
 

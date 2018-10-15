@@ -1,4 +1,6 @@
+
 const Model = {
+  
   modelStorage: {},
 
   saveToLocalStorage(object) {
