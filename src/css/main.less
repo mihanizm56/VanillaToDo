@@ -1,1 +1,141 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0079bf;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main-wrapper__main-paragraph,
+.task-wrapper,
+.new-task {
+  background-color: #dfe3e6;
+}
+
+.main-wrapper__main-paragraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  font-size: 29px;
+  width: 500px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.new-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  .new-task__task-input {
+    min-width: 80%;
+    max-width: 90%;
+    min-height: 30px;
+    max-height: 100px;
+    padding-left: 10px;
+    font-style: Arial;
+    font-size: 22px;
+    border: 0.5px solid #d9dfe2;
+    border-radius: 10px;
+    outline: none;
+  }
+  .new-task__add-button {
+    font-family: Arial;
+    color: #fff;
+    font-size: 20px;
+    padding-left: 10px;
+    height: 61px;
+    width: 199px;
+    background-color: #5aac44;
+    border-radius: 15px;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      background-color: #63a34e;
+    }
+    &:active {
+      background-color: #658b67;
+    }
+  }
+}
+
+.task-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+
+.using-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 500px;
+  height: 200px;
+  border: 1px solid black;
+  .using-task__task {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    //border: 1px solid green;
+    .done-box {
+      width: 20px;
+      height: 20px;
+    }
+    .task-name {
+    }
+    .task-name-input {
+      min-width: 80%;
+      max-width: 90%;
+      min-height: 30px;
+      max-height: 100px;
+      padding-left: 10px;
+      font-style: Arial;
+      font-size: 22px;
+      border: 0.5px solid #d9dfe2;
+      border-radius: 10px;
+      outline: none;
+    }
+  }
+  .using-task__buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    .change-button,
+    .save-item-button,
+    .delete-button {
+      font-family: Arial;
+      color: #fff;
+      font-size: 20px;
+      padding-left: 10px;
+      height: 61px;
+      width: 160px;
+      background-color: #5aac44;
+      border-radius: 15px;
+      border: none;
+      outline: 0;
+      cursor: pointer;
+      transition: 0.5s;
+      &:hover {
+        background-color: #63a34e;
+      }
+      &:active {
+        background-color: #658b67;
+      }
+    }
+  }
+}

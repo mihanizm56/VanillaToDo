@@ -27,7 +27,7 @@ const Controller = {
     },
 
     delegateClick(event) {
-        if (event.target.className == "add-button") return this.addTask(event);
+        if (event.target.className == "new-task__add-button") return this.addTask(event);
         if (event.target.className == "save-button") return this.saveToStorage();
         if (event.target.className == "done-box") return this.doneCheck(event);
         if (event.target.className == "delete-button") return this.deleteTask(event);
@@ -39,7 +39,7 @@ const Controller = {
         const task = event.target.parentElement.firstElementChild.value;
         const doneCheck = event.target.previousElementSibling.checked;
         const object = { task, doneCheck }
-        const inputPlace = document.querySelector(".task-input");
+        const inputPlace = document.querySelector(".new-task__task-input");
         inputPlace.value = "";
         if (task){
             Model.saveToModelStorage(task, object);
