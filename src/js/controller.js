@@ -10,10 +10,23 @@ const Controller = {
                 this.insertTasks(data);
                 this.renderModelStorage(data)
             })
+            .then(()=>{
+                this.addDrags();
+            })
         this.addListeners();
+        
     },
     addListeners() {
         document.addEventListener('click', () => { this.delegateClick(event) })
+    },
+    addDrags(){
+        let listOfTasks = document.querySelectorAll('.using-task');
+        listOfTasks.forEach((element)=>{
+            element.draggable = true
+            console.log(element);
+        })
+        
+        //console.log(listOfTasks);
     },
     delegateClick(event) {
         //console.log(event.target.className);
