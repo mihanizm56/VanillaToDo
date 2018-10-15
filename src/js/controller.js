@@ -20,11 +20,11 @@ const Controller = {
         document.addEventListener('click', () => { this.delegateClick(event) })
     },
     addDrags(){
-        let listOfTasks = document.querySelectorAll('.using-task');
-        listOfTasks.forEach((element)=>{
-            element.draggable = true
-            console.log(element);
-        })
+        // let listOfTasks = document.querySelectorAll('.using-task');
+        // listOfTasks.forEach((element)=>{
+        //     element.draggable = true
+        //     console.log(element);
+        // })
         
         //console.log(listOfTasks);
     },
@@ -44,9 +44,11 @@ const Controller = {
         const object = { task, doneCheck }
         const inputPlace = document.querySelector(".task-input");
         inputPlace.value = "";
-       
-        Model.saveToModelStorage(task, object);
-        View.addTask(object); 
+        if (task){
+            Model.saveToModelStorage(task, object);
+            Model.saveToLocalStorage(Model.modelStorage);
+            View.addTask(object); 
+        }
     },
     saveToStorage(){
         Model.cleanLocalStorage();
@@ -85,7 +87,7 @@ const Controller = {
             task: title.innerText,
             doneCheck: doneCheck
         };
-
+        Model.saveToLocalStorage(Model.modelStorage);
         //console.log(Model.modelStorage);
     },
     deleteTask(event) {
@@ -95,6 +97,7 @@ const Controller = {
 
         element.style.display = "none";
         delete Model.modelStorage[key]
+        Model.saveToLocalStorage(Model.modelStorage);
     },
     renderModelStorage(object){
         //console.log("renderModelStorage");
@@ -106,6 +109,7 @@ const Controller = {
     doneCheck(event) {
         //console.log("doneCheck");
         Model.modelStorage[event.target.parentElement.firstElementChild.innerText].doneCheck = event.target.checked;
+        Model.saveToLocalStorage(Model.modelStorage);
     }
 }
 
