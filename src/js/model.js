@@ -22,7 +22,7 @@ const Model = {
     return new Promise(resolve => {
       if (localStorage.data){
         const data = JSON.parse(localStorage.data);
-        console.log(`data = ${data}`)
+        //console.log(`data = ${data}`)
         resolve(data);
       }
       else{

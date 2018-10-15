@@ -21,15 +21,19 @@ const Controller = {
         if (event.target.className == "save-button") return this.saveToStorage();
         if (event.target.className == "done-box") return this.doneCheck(event);
         if (event.target.className == "delete-button") return this.deleteTask(event);
+        if (event.target.className == "change-button") return this.changeTask(event);
+        if (event.target.className == "save-item-button") return this.saveChangesInTask(event);
     },
     addTask(event) {
         //console.log("пришло в addTask");
         const task = event.target.parentElement.firstElementChild.value;
         const doneCheck = event.target.previousElementSibling.checked;
         const object = { task, doneCheck }
-
+        const inputPlace = document.querySelector(".task-input");
+        inputPlace.value = "";
+       
         Model.saveToModelStorage(task, object);
-        View.addTask(object);
+        View.addTask(object); 
     },
     saveToStorage(){
         Model.cleanLocalStorage();
@@ -41,6 +45,35 @@ const Controller = {
         for (let key in object) {
             View.addTask(object[key]);
         }
+    },
+    changeTask(event){
+
+        const title = event.target.parentElement.firstElementChild;
+        const inputTitle = event.target.parentElement.firstElementChild.nextElementSibling;
+
+        title.style.display = 'none'
+        inputTitle.style.display = "block";
+
+        //console.log(Model.modelStorage);
+    },
+    saveChangesInTask(event){
+        const startTitle = event.target.parentElement.firstElementChild.innerText
+        const title = event.target.parentElement.firstElementChild;
+        const inputTitle = event.target.parentElement.firstElementChild.nextElementSibling;
+        const doneCheck = event.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.checked
+
+        title.innerText = inputTitle.value;
+        title.style.display = "block";
+        inputTitle.style.display = "none";
+
+        delete Model.modelStorage[startTitle];
+
+        Model.modelStorage[title.innerText] = {
+            task: title.innerText,
+            doneCheck: doneCheck
+        };
+
+        //console.log(Model.modelStorage);
     },
     deleteTask(event) {
         //console.log("прилетело в deleteTask");

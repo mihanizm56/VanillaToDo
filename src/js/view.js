@@ -10,8 +10,10 @@ const View = {
     container.innerHTML = `
     <div class="using-task">
         <p type="text" placeholder="задача" class="task-name" >${object.task}</p>
+        <input type="text" class="task-name-input" style='display:none;' id="doneBox" value = ${object.task}>
         <input type="checkbox" ${checked} class="done-box" id="doneBox">
         <button id="addButton" class="change-button">Редактировать</button>
+        <button id="saveButton" class="save-item-button">Сохранить</button>
         <button id="saveButton" class="delete-button">Удалить задачу</button>
     </div>
     `;
