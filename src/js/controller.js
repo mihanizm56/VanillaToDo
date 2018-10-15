@@ -62,27 +62,27 @@ const Controller = {
     },
 
     changeTask(event){
-        const title = event.target.parentElement.firstElementChild;
-        const inputTitle = event.target.parentElement.firstElementChild.nextElementSibling;
+        const title = event.target.parentElement.previousElementSibling.firstElementChild;
+        const inputTitle = title.nextElementSibling;
 
         title.style.display = 'none'
         inputTitle.style.display = "block";
     },
 
     saveChangesInTask(event){
-        const startTitle = event.target.parentElement.firstElementChild.innerText
-        const title = event.target.parentElement.firstElementChild;
-        const inputTitle = event.target.parentElement.firstElementChild.nextElementSibling;
-        const doneCheck = event.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.checked
+        const title = event.target.parentElement.previousElementSibling.firstElementChild.innerText;
+        const titleElement = event.target.parentElement.previousElementSibling.firstElementChild;
+        const inputTitle = titleElement.nextElementSibling;
+        const doneCheck = inputTitle.nextElementSibling.checked;
 
-        title.innerText = inputTitle.value;
-        title.style.display = "block";
+        titleElement.innerText = inputTitle.value;
+        titleElement.style.display = "block";
         inputTitle.style.display = "none";
 
-        delete Model.modelStorage[startTitle];
+        delete Model.modelStorage[title];
 
-        Model.modelStorage[title.innerText] = {
-            task: title.innerText,
+        Model.modelStorage[titleElement.innerText] = {
+            task: titleElement.innerText,
             doneCheck: doneCheck
         };
         Model.saveToLocalStorage(Model.modelStorage);
