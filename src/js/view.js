@@ -26,6 +26,16 @@ const View = {
 
   cleanWrapper(){
     document.querySelector(".task-wrapper").innerHTML = "";
+  },
+  showElement(element){
+    element.style.display = 'block'
+  },
+  hideElement(element){
+    element.style.display = 'none'
+  },
+  decorateTextOfElement(element,style,decoration){
+    element.style.fontStyle = style;
+    element.style.textDecoration = decoration;
   }
 }
 
