@@ -32,18 +32,24 @@ const Controller = {
         if (event.target.className == "delete-button") return this.deleteTask(event);
         if (event.target.className == "change-button") return this.changeTask(event);
         if (event.target.className == "save-item-button") return this.saveChangesInTask(event);
-        if (event.target.className == "button-open" || event.target.className == "button-close") return this.changeStateOfApp(event);
+        if(event.target.classList.contains('button-open')||event.target.className == "button-close") return this.changeStateOfApp(event);
     },
 
     changeStateOfApp(){
         const newTask = document.querySelector(".new-task");
+        const buttonOpen = document.querySelector(".button-open");
+
+        console.log(event.target.dataset.state)
+
         newTask.classList.toggle("new-task--active");
+        buttonOpen.classList.toggle("button-open--active");
     },
 
     addTask(event) {
         const task = event.target.parentElement.firstElementChild.value;
-        const doneCheck = event.target.previousElementSibling.checked;
-        const object = { task, doneCheck }
+        const object = { task, 'doneCheck':false }
+        console.log('object')
+        console.log(object)
         const inputPlace = document.querySelector(".new-task__task-input");
         inputPlace.value = "";
         if (task){
@@ -75,26 +81,28 @@ const Controller = {
     },
 
     saveChangesInTask(event){
-        const title = event.target.parentElement.previousElementSibling.firstElementChild.innerText;
+        const title = event.target.parentElement.previousElementSibling.firstElementChild.value;
         const titleElement = event.target.parentElement.previousElementSibling.firstElementChild;
         const inputTitle = titleElement.nextElementSibling;
         const doneCheck = inputTitle.nextElementSibling.checked;
 
-        titleElement.innerText = inputTitle.value;
+        console.log(doneCheck)
+
+        titleElement.value = inputTitle.value;
         titleElement.style.display = "block";
         inputTitle.style.display = "none";
 
         delete Model.modelStorage[title];
 
-        Model.modelStorage[titleElement.innerText] = {
-            task: titleElement.innerText,
+        Model.modelStorage[titleElement.value] = {
+            task: titleElement.value,
             doneCheck: doneCheck
         };
         Model.saveToLocalStorage(Model.modelStorage);
     },
 
     deleteTask(event) {
-        const key = event.target.parentElement.previousElementSibling.firstElementChild.innerText
+        const key = event.target.parentElement.previousElementSibling.firstElementChild.value
         const element = event.target.parentElement.parentElement;
 
         element.style.display = "none";
@@ -119,7 +127,7 @@ const Controller = {
             title.style.fontStyle = 'normal';
         }
 
-        Model.modelStorage[event.target.parentElement.firstElementChild.innerText].doneCheck = event.target.checked;
+        Model.modelStorage[event.target.parentElement.firstElementChild.value].doneCheck = event.target.checked;
         Model.saveToLocalStorage(Model.modelStorage);
     }
 }

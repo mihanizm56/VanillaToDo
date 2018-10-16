@@ -6,9 +6,11 @@ const View = {
     container.className = 'using-task';
     let checked = object.doneCheck ? 'checked' : '';
 
+    let textStyle = object.doneCheck ? 'font-style:italic;text-decoration:line-through;' : 'font-style:normal;text-decoration:none;';
+
     container.innerHTML = `
         <div class='using-task__task'>
-          <p type="text" placeholder="задача" class="task-name" >${object.task}</p>
+          <textarea disabled type="text" placeholder="задача" class="task-name" style=${textStyle} >${object.task}</textarea>
           <textarea class="task-name-input" style='display:none;' id="doneBox" >${object.task}</textarea>
           <input type="checkbox" ${checked} class="done-box" id="doneBox">
         </div>
