@@ -35,45 +35,76 @@ body {
   position: absolute;
   top: 50px;
   left: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  border-radius: 15px;
-  .new-task__task-input {
-    min-width: 80%;
-    max-width: 90%;
-    min-height: 30px;
-    max-height: 100px;
-    padding-left: 10px;
-    font-family: Arial;
-    font-size: 22px;
-    border: 0.5px solid #d9dfe2;
-    border-radius: 10px;
-    outline: none;
-  }
-  .new-task__add-button {
-    font-family: Arial;
-    color: #fff;
-    font-size: 20px;
-    padding-left: 10px;
-    height: 61px;
-    width: 199px;
-    background-color: #5aac44;
+  transform:translateX(-1000px);
+  &--active{
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
+    height: 200px;
     border-radius: 15px;
-    border: none;
-    outline: 0;
-    cursor: pointer;
-    transition: 0.5s;
-    &:hover {
-      background-color: #63a34e;
+    animation: fadeInLeft .5s both;
+    .new-task__task-input {
+      min-width: 80%;
+      max-width: 90%;
+      min-height: 30px;
+      max-height: 100px;
+      padding-left: 10px;
+      margin-top: 20px;
+      font-family: Arial;
+      font-size: 22px;
+      border: 0.5px solid #d9dfe2;
+      border-radius: 10px;
+      outline: none;
     }
-    &:active {
-      background-color: #658b67;
+    .new-task__add-button {
+      font-family: Arial;
+      color: #fff;
+      font-size: 20px;
+      padding-left: 10px;
+      height: 61px;
+      width: 199px;
+      background-color: #5aac44;
+      border-radius: 15px;
+      border: none;
+      outline: 0;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background-color: #63a34e;
+      }
+      &:active {
+        background-color: #658b67;
+      }
+    }
+    .button-close{
+      position: absolute;
+      top: 8px;
+      left: 274px;
+      width: 20px;
+      height: 50px;
+      background-image: url('../img/cross_1.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
     }
   }
+}
+
+.button-open{
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 20px;
+  height: 50px;
+  background-image: url('../img/plus.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer; 
 }
 
 .task-wrapper{
@@ -140,7 +171,7 @@ body {
       border: none;
       outline: 0;
       cursor: pointer;
-      transition: 0.5s;
+      transition: 0.3s;
       &:hover {
         background-color: #63a34e;
       }
@@ -149,4 +180,11 @@ body {
       }
     }
   }
+}
+
+
+
+@keyframes fadeInLeft{
+  from{transform: translateX(-1000px);opacity: 0;}  
+  to{transform: translateX(0);opacity: 1;}
 }

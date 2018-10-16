@@ -13,7 +13,6 @@ const Controller = {
 
     renderTasks(){
         Model.insertFromStorage().then(data => {
-          //console.log(data);
           this.insertTasks(data);
           this.renderModelStorage(data);
         })
@@ -33,6 +32,12 @@ const Controller = {
         if (event.target.className == "delete-button") return this.deleteTask(event);
         if (event.target.className == "change-button") return this.changeTask(event);
         if (event.target.className == "save-item-button") return this.saveChangesInTask(event);
+        if (event.target.className == "button-open" || event.target.className == "button-close") return this.changeStateOfApp(event);
+    },
+
+    changeStateOfApp(){
+        const newTask = document.querySelector(".new-task");
+        newTask.classList.toggle("new-task--active");
     },
 
     addTask(event) {
@@ -89,8 +94,8 @@ const Controller = {
     },
 
     deleteTask(event) {
-        const key = event.target.parentElement.firstElementChild.innerText
-        const element = event.target.parentElement;
+        const key = event.target.parentElement.previousElementSibling.firstElementChild.innerText
+        const element = event.target.parentElement.parentElement;
 
         element.style.display = "none";
         delete Model.modelStorage[key]
@@ -102,6 +107,18 @@ const Controller = {
     },
 
     doneCheck(event) {
+        const title = event.target.previousElementSibling.previousElementSibling
+
+        if (event.target.checked){
+            title.style.textDecoration = "line-through";
+            title.style.fontStyle = 'italic';
+        }
+
+        else{
+            title.style.textDecoration = "none";
+            title.style.fontStyle = 'normal';
+        }
+
         Model.modelStorage[event.target.parentElement.firstElementChild.innerText].doneCheck = event.target.checked;
         Model.saveToLocalStorage(Model.modelStorage);
     }

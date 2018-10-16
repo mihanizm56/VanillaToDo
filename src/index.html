@@ -10,10 +10,13 @@
     <div class="main-wrapper">
         <p class="main-wrapper__main-paragraph">Нужно сделать</p>
         <div class="task-wrapper"></div>
-        <div class="new-task" style='margin-top:200px;'>
+        <div class="new-task" draggable="true" style='margin-top:200px;'>
             <textarea placeholder="Задача" class="new-task__task-input"></textarea>
             <button id="addButton" class="new-task__add-button">Добавить задачу</button>
+            <div class="button-close"></div>
         </div>
+        <div class="button-open"></div>
+        <!-- <button class="button-close"></button> -->
     </div>
     <script src="./js/index.js"></script>
 </body>
