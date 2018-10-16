@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="main-wrapper">
+        <div data-state='1' class="button-open button-open--active"></div>
+        <div class="button-update"></div>
         <p class="main-wrapper__main-paragraph">Нужно сделать</p>
         <div class="task-wrapper"></div>
-        <div class="new-task" draggable="true" style='margin-top:200px;'>
+        <div class="new-task" draggable="true">
             <textarea placeholder="Задача" class="new-task__task-input"></textarea>
             <button id="addButton" class="new-task__add-button">Добавить задачу</button>
             <div data-state='0' class="button-close"></div>
         </div>
-        <div data-state='1' class="button-open button-open--active"></div>
-        <div class="button-update"></div>
     </div>
     <script src="./js/index.js"></script>
 </body>
